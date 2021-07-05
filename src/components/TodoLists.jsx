@@ -1,15 +1,15 @@
+import { Button, List, TodoText, ListContainer } from "../global/Todo";
+
 export const TodoLists = ({ todos, handleDelete, handleEdit }) => {
   return (
-    <ul className="allTodos">
+    <ListContainer>
       {todos.map((t) => (
-        <li className="singleTodo">
-          <span className="todoText" key={t.id}>
-            {t.todo}
-          </span>
-          <button onClick={() => handleEdit(t.id)}>Edit</button>
-          <button onClick={() => handleDelete(t.id)}>Delete</button>
-        </li>
+        <List>
+          <TodoText key={t.id}>{t.todo}</TodoText>
+          <Button onClick={() => handleEdit(t.id)}>Edit</Button>
+          <Button onClick={() => handleDelete(t.id)}>Delete</Button>
+        </List>
       ))}
-    </ul>
+    </ListContainer>
   );
 };

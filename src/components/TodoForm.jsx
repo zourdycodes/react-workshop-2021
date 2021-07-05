@@ -1,12 +1,14 @@
+import { FormContainer, Button, Input } from "../global/Todo";
+
 export const TodoForm = ({ handleSubmit, todo, editId, setTodo }) => {
   return (
-    <form className="todoForm" onSubmit={handleSubmit}>
-      <input
+    <FormContainer onSubmit={handleSubmit}>
+      <Input
         type="text"
         value={todo}
         onChange={({ target }) => setTodo(target.value)}
       />
-      <button type="submit">{editId ? "Edit" : "Go"}</button>
-    </form>
+      <Button type="submit">{editId ? "Edit" : "Go"}</Button>
+    </FormContainer>
   );
 };

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { TodoForm } from "./components/TodoForm";
 import { TodoLists } from "./components/TodoLists";
-import "./global/App.css";
+
+import { Container, Heading, SubContainer } from "./global/Todo";
 
 export const App = () => {
   const [todo, setTodo] = useState("");
@@ -42,9 +43,9 @@ export const App = () => {
   };
 
   return (
-    <div className="app">
-      <div className="container">
-        <h1>Simple Todo List</h1>
+    <Container>
+      <SubContainer>
+        <Heading>Simple Todo List</Heading>
         <TodoForm
           handleSubmit={handleSubmit}
           todo={todo}
@@ -57,7 +58,7 @@ export const App = () => {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-      </div>
-    </div>
+      </SubContainer>
+    </Container>
   );
 };
