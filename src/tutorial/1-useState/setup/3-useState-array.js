@@ -6,8 +6,11 @@ const UseStateArray = () => {
   const [counter, setCounter] = useState(0);
 
   const removeItem = (id) => {
-    let newPeople = people.filter((person) => person.id !== id);
-    setPeople(newPeople);
+    // REFACTOR
+    setPeople((oldPeople) => {
+      let newPeople = oldPeople.filter((person) => person.id !== id);
+      return newPeople;
+    });
   };
 
   const increaseNum = () => setCounter((counter) => ++counter);
@@ -50,7 +53,7 @@ const UseStateArray = () => {
           Increase
         </button>
         <button type="button" className="btn" onClick={decreaseNum}>
-          Dcrease
+          Decrease
         </button>
       </div>
     </>
