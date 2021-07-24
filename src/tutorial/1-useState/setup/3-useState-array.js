@@ -49,11 +49,11 @@ const UseStateArray = () => {
           marginBottom: "45px",
         }}
       >
-        <button type="button" className="btn" onClick={increaseNum}>
-          Increase
-        </button>
         <button type="button" className="btn" onClick={decreaseNum}>
           Decrease
+        </button>
+        <button type="button" className="btn" onClick={increaseNum}>
+          Increase
         </button>
       </div>
     </>
