@@ -1,6 +1,6 @@
 import React from "react";
-// import { UseStateBasics } from "./tutorial/1-useState/setup/2-useState-basics";
-import Setup from "./tutorial/1-useState/setup/3-useState-array";
+// import { UseStateBasics } from "./tutorial/1-useState/";
+import Setup from "./tutorial/2-useEffect/setup/2-useEffect-cleanup";
 
 export const App = () => {
   return (
