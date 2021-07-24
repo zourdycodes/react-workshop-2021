@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 const UseEffectBasics = () => {
   const [value, setValue] = useState(0);
 
+  // if its get updated and you only want to rendered as initial render => list the dependecies
   useEffect(() => {
     console.log("Use Effect rendered!");
 
