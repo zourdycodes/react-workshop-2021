@@ -40,7 +40,7 @@ const MultipleReturns = () => {
     return (
       <React.Fragment>
         <h4>
-          Error, No Data fetched! the request call is maybe forbidden or your
+          Error, No Data retrieved! the request call is maybe forbidden or your
           API endpoint is wrong
         </h4>
       </React.Fragment>
