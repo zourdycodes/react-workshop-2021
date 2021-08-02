@@ -7,31 +7,32 @@ const MultipleReturns = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(url)
-        .then((response) => {
-          if (
-            !response.ok &&
-            response.status >= 400 &&
-            response.status <= 600
-          ) {
-            return setError((error) => !error);
-          }
+    try {
+      const fetchUser = async () => {
+        const response = await fetch(url)
+          .then((response) => {
+            if (
+              !response.ok &&
+              response.status >= 400 &&
+              response.status <= 600
+            ) {
+              return setError((error) => !error);
+            }
 
-          return response.json();
-        })
-        .then((data) => {
-          setUser(data);
-          setLoading((loading) => !loading);
-        });
+            return response.json();
+          })
+          .then((data) => {
+            setUser(data);
+            setLoading((loading) => !loading);
+          });
 
-      // const data = await response.json()
-      // setUser(data);
-      // setLoading((loading) => !loading);
-      return response;
-    };
+        return response;
+      };
 
-    fetchUser();
+      fetchUser();
+    } catch (error) {
+      throw new Error(error);
+    }
   }, []);
 
   console.log(error);
