@@ -12,15 +12,23 @@ const ControlledInputs = () => {
   //2.
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setUsers([{ firstName, email }]);
-  };
+    if (firstName && email) {
+      const person = { id: new Date().getTime().toString(), firstName, email };
+      setUsers((people) => {
+        return [...people, person];
+      });
 
-  console.log(users);
+      setFirstName("");
+      setEmail("");
+    } else {
+      console.log("No Input Value");
+    }
+  };
 
   return (
     <article>
@@ -58,6 +66,16 @@ const ControlledInputs = () => {
         </div>
         <button type="submit">add person</button>
       </form>
+      {users?.map((person) => {
+        const { id, firstName, email } = person;
+
+        return (
+          <div key={id} className="item">
+            <h4>{firstName}</h4>
+            <p>{email}</p>
+          </div>
+        );
+      })}
     </article>
   );
 };
