@@ -6,13 +6,21 @@ import React, { useState } from "react";
 // value, onChange
 
 const ControlledInputs = () => {
-  const [user, setUser] = useState({ name: "", email: "" });
+  // 1.
+  // const [user, setUser] = useState({ name: "", email: "" });
+
+  //2.
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [users, setUsers] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(user);
+    setUsers([{ firstName, email }]);
   };
+
+  console.log(users);
 
   return (
     <article>
@@ -23,12 +31,14 @@ const ControlledInputs = () => {
             type="text"
             name="name"
             id="name"
-            value={user.name}
-            onChange={({ target }) =>
-              setUser((user) => {
-                return (user = { ...user, name: target.value });
-              })
-            }
+            value={firstName}
+            // onChange={({ target }) =>
+            //   setUser((user) => {
+            //     return (user = { ...user, name: target.value });
+            //   })
+            // }
+
+            onChange={({ target }) => setFirstName(target.value)}
           />
         </div>
         <div className="form-control">
@@ -37,12 +47,13 @@ const ControlledInputs = () => {
             type="text"
             name="email"
             id="email"
-            value={user.email}
-            onChange={({ target }) =>
-              setUser((user) => {
-                return (user = { ...user, email: target.value });
-              })
-            }
+            value={email}
+            // onChange={({ target }) =>
+            //   setUser((user) => {
+            //     return (user = { ...user, email: target.value });
+            //   })
+            // }
+            onChange={({ target }) => setEmail(target.value)}
           />
         </div>
         <button type="submit">add person</button>
