@@ -19,6 +19,14 @@ const ControlledInputs = () => {
     const name = target.name;
     const value = target.value;
 
+    console.log([name]);
+
+    // different approach
+    setUser((user) => {
+      return { ...user, [name]: value };
+    });
+
+    // READABLE APPROACH
     if (name === "firstName") {
       setUser((user) => {
         return { ...user, firstName: value };
