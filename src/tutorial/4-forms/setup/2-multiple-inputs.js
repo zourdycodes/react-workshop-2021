@@ -15,6 +15,29 @@ const ControlledInputs = () => {
 
   const [people, setPeople] = useState([]);
 
+  const handleChange = ({ target }) => {
+    const name = target.name;
+    const value = target.value;
+
+    if (name === "firstName") {
+      setUser((user) => {
+        return { ...user, firstName: value };
+      });
+    }
+
+    if (name === "email") {
+      setUser((user) => {
+        return { ...user, email: value };
+      });
+    }
+
+    if (name === "age") {
+      setUser((user) => {
+        return { ...user, age: value };
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (user.firstName && user.email && user.age) {
@@ -33,10 +56,11 @@ const ControlledInputs = () => {
       console.log("empty values");
     }
   };
+
   return (
     <>
       <article>
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form">
           <div className="form-control">
             <label htmlFor="firstName">Name : </label>
             <input
@@ -44,11 +68,7 @@ const ControlledInputs = () => {
               id="firstName"
               name="firstName"
               value={user.firstName}
-              onChange={(e) =>
-                setUser((user) => {
-                  return (user = { firstName: e.target.value, ...user });
-                })
-              }
+              onChange={handleChange}
             />
           </div>
           <div className="form-control">
@@ -58,11 +78,7 @@ const ControlledInputs = () => {
               id="email"
               name="email"
               value={user.email}
-              onChange={({ target }) =>
-                setUser((user) => {
-                  return (user = { email: target.value, ...user });
-                })
-              }
+              onChange={handleChange}
             />
           </div>
           <div className="form-control">
@@ -72,14 +88,12 @@ const ControlledInputs = () => {
               id="age"
               name="age"
               value={user.age}
-              onChange={(e) =>
-                setUser((user) => {
-                  return (user = { age: e.target.value, ...user });
-                })
-              }
+              onChange={handleChange}
             />
           </div>
-          <button type="submit">add person</button>
+          <button onClick={handleSubmit} type="submit">
+            add person
+          </button>
         </form>
         {people.map((person, index) => {
           const { id, firstName, email } = person;
