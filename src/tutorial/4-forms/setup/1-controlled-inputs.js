@@ -26,7 +26,7 @@ const ControlledInputs = () => {
       setFirstName("");
       setEmail("");
     } else {
-      console.log("No Input Value");
+      alert("No Input Value");
     }
   };
 
