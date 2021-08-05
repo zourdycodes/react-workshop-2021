@@ -1,6 +1,5 @@
 import React, { useState, useReducer, useEffect, useRef } from "react";
 import Modal from "./Modal";
-import { data } from "../../../data";
 // reducer function
 const reducer = (state, action) => {
   switch (action.type) {
@@ -18,6 +17,20 @@ const reducer = (state, action) => {
         ...state,
         isModalOpen: true,
         modalContent: "Please enter some value!",
+      };
+
+    case "CLOSE_MODAL":
+      return {
+        ...state,
+        isModalOpen: false,
+      };
+
+    case "REMOVE_ITEM":
+      return {
+        ...state,
+        people: state.people.filter((item) => item.id !== action.payload),
+        modalContent: "item deleted!",
+        isModalOpen: true,
       };
 
     default:
@@ -49,13 +62,19 @@ const Index = () => {
     }
   };
 
+  const closeModal = () => {
+    dispatch({ type: "CLOSE_MODAL" });
+  };
+
   useEffect(() => {
     refInput.current.focus();
   });
 
   return (
     <>
-      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
+      {state.isModalOpen && (
+        <Modal modalContent={state.modalContent} closeModal={closeModal} />
+      )}
       <form onSubmit={handleSubmit} className="form">
         <div>
           <input
@@ -69,8 +88,15 @@ const Index = () => {
       </form>
 
       {state.people?.map((person) => (
-        <div key={person.id}>
-          <p>{person.name}</p>
+        <div key={person.id} className="item">
+          <h4>{person.name}</h4>
+          <button
+            onClick={() =>
+              dispatch({ type: "REMOVE_ITEM", payload: person.id })
+            }
+          >
+            remove
+          </button>
         </div>
       ))}
     </>
