@@ -2,11 +2,30 @@ import React, { useState, useReducer, useEffect, useRef } from "react";
 import Modal from "./Modal";
 import { data } from "../../../data";
 // reducer function
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADDING_ITEM":
+      return {
+        ...state,
+        people: data,
+        isModalOpen: true,
+        modalContent: "Hello People!",
+      };
+
+    default:
+      return state;
+  }
+};
+
+const defaultState = {
+  people: [],
+  isModalOpen: false,
+  modalContent: "numb",
+};
 
 const Index = () => {
   const [name, setName] = useState("");
-  const [people, setPeople] = useState(data);
-  const [showModal, setShowModal] = useState(false);
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
   const refInput = useRef(null);
 
@@ -14,11 +33,8 @@ const Index = () => {
     e.preventDefault();
 
     if (name) {
-      setShowModal(true);
-      setPeople([...people, { id: new Date().getTime().toString(), name }]);
-      setName("");
+      dispatch({ type: "ADDING_ITEM" });
     } else {
-      setShowModal((showModal) => !showModal);
     }
   };
 
@@ -28,7 +44,7 @@ const Index = () => {
 
   return (
     <>
-      {showModal && <Modal />}
+      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
       <form onSubmit={handleSubmit} className="form">
         <div>
           <input
@@ -41,14 +57,11 @@ const Index = () => {
         <button type="submit">add</button>
       </form>
 
-      {people?.map((person) => {
-        const { id, name } = person;
-        return (
-          <div key={id}>
-            <h4>{name}</h4>
-          </div>
-        );
-      })}
+      {state.people?.map((person) => (
+        <div key={person.id}>
+          <p>{person.name}</p>
+        </div>
+      ))}
     </>
   );
 };
