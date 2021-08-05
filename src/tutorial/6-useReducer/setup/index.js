@@ -5,11 +5,19 @@ import { data } from "../../../data";
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADDING_ITEM":
+      const newItems = [...state.people, action.payload];
       return {
         ...state,
-        people: data,
+        people: newItems,
         isModalOpen: true,
-        modalContent: "Hello People!",
+        modalContent: "Item Added!",
+      };
+
+    case "NO_TYPE":
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent: "Please enter some value!",
       };
 
     default:
@@ -33,8 +41,11 @@ const Index = () => {
     e.preventDefault();
 
     if (name) {
-      dispatch({ type: "ADDING_ITEM" });
+      const newItem = { id: new Date().getTime().toString(), name };
+      dispatch({ type: "ADDING_ITEM", payload: newItem });
+      setName("");
     } else {
+      dispatch({ type: "NO_TYPE" });
     }
   };
 
