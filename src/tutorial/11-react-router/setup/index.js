@@ -13,7 +13,19 @@ import Person from "./Person";
 import Navbar from "./Navbar";
 
 const ReactRouterSetup = () => {
-  return <h2>react router</h2>;
+  return (
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/people" component={People} />
+        <Route path="/person" component={Person} />
+
+        <Route path="*" component={Error} />
+      </Switch>
+    </Router>
+  );
 };
 
 export default ReactRouterSetup;
