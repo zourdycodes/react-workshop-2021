@@ -35,16 +35,6 @@ const Navbar = () => {
             People
           </Link>
         </li>
-        <li>
-          <Link
-            to="/person"
-            style={{
-              color: "white",
-            }}
-          >
-            Person
-          </Link>
-        </li>
       </ul>
     </nav>
   );

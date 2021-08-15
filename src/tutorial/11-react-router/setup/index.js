@@ -20,7 +20,7 @@ const ReactRouterSetup = () => {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/people" component={People} />
-        <Route path="/person" component={Person} />
+        <Route path="/person/:id" children={<Person />} />
 
         <Route path="*" component={Error} />
       </Switch>
